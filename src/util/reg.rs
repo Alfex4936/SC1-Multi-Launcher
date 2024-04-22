@@ -33,6 +33,48 @@ pub fn get_game_path(is_64bits: bool) -> Option<PathBuf> {
     }
 }
 
+/// Sets the game path in the registry if the key does not already exist.
+///
+/// # Arguments
+/// * `new_path` - The new installation path to set if the key is created.
+///
+/// # Returns
+/// * An `io::Result<()>` indicating success or failure.
+pub fn set_game_path(new_path: &str) -> std::io::Result<()> {
+    let hklm = RegKey::predef(HKEY_LOCAL_MACHINE);
+    let subkey_path = if cfg!(target_arch = "x86_64") {
+        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\StarCraft"
+    } else {
+        "SOFTWARE\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\StarCraft"
+    };
+
+    // Create or open the key with write access
+    let (starcraft_key, disposition) =
+        hklm.create_subkey_with_flags(subkey_path, KEY_ALL_ACCESS)?;
+
+    match disposition {
+        REG_CREATED_NEW_KEY => {
+            // Only set the value if a new key has been created.
+            starcraft_key.set_value("InstallLocation", &new_path)?;
+
+            let exe_subfolder = if cfg!(target_arch = "x86_64") {
+                "x86_64"
+            } else {
+                "x86"
+            };
+            let game_path =
+                PathBuf::from(new_path).join(format!("{}\\StarCraft.exe", exe_subfolder));
+
+            println!("Game path set to: {}", game_path.display());
+        }
+        REG_OPENED_EXISTING_KEY => {
+            // Do nothing if the key already exists.
+        }
+    }
+
+    Ok(())
+}
+
 pub async fn async_registry_search(
     root_key: HKEY,
     search_term: &str,

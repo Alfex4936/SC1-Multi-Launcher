@@ -24,6 +24,8 @@ The original C++ version can be found at [sc_multiloader](https://github.com/som
 
 ## Play
 
+Download CLI or GUI version from [here](https://github.com/Alfex4936/SC1-Multi-Launcher/releases)
+
 ### CLI
 
 If you want to run N games, use `-n`.
@@ -32,10 +34,10 @@ If you want to run N games, use `-n`.
 ./sclauncher-cli.exe -n 3
 ```
 
-Want to run 64bits? pass `-i`
+Want to run in 64bits? pass `-b`
 
 ```powershell
-./sclauncher-cli.exe -n 3 -i
+./sclauncher-cli.exe -n 3 -b
 ```
 
 ### GUI

@@ -57,7 +57,7 @@ impl GameManager {
         let game_launch = task::spawn_blocking(move || {
             let args = vec!["-launch"];
             let pi = spawn_console_process(game_path.to_str().unwrap_or_default(), args);
-            println!("Launched game with pid: {}", pi.dwProcessId);
+            println!(" + Launched game with pid: {}", pi.dwProcessId);
             pi
         });
 
@@ -291,7 +291,10 @@ pub async unsafe fn modify_processes_once() -> Result<()> {
 
                                 // Check status if necessary and then close the handle
                                 if status.is_ok() {
-                                    println!("\t - Closed proc_handle for StarCraft.exe!");
+                                    println!(
+                                        "\t - Closed proc_handle for StarCraft.exe.{}",
+                                        process_handle.0
+                                    );
                                     let _ = CloseHandle(copy_handle);
                                     is_handle_found = true;
                                     break 'outer;
@@ -479,7 +482,6 @@ pub async unsafe fn modify_processes() -> Result<()> {
 
                                 // Check status if necessary and then close the handle
                                 if status.is_ok() {
-                                    println!("Closed");
                                     let _ = CloseHandle(copy_handle);
                                 }
                             }
