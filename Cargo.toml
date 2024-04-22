@@ -10,6 +10,18 @@ readme = "README.md"
 keywords = ["starcraft", "multi", "launcher", "rust", "windows"]
 categories = ["game", "utility", "windows"]
 
+[lib]
+name = "sclauncher"
+path = "src/lib.rs"
+
+[[bin]]
+name = "sclauncher-cli"
+path = "src/bin/cli.rs"
+
+[[bin]]
+name = "sclauncher-gui"
+path = "src/bin/gui.rs"
+
 [dependencies]
 windows = { version = "0.56.0", features = [
     "Wdk_Foundation",
@@ -31,7 +43,19 @@ windows = { version = "0.56.0", features = [
 winreg = "0.52.0"
 tokio = { version = "1", features = ["full"] }
 regex = "1.10.4"
+clap = { version = "4.5.4", features = ["derive"] }
 # windows-targets = "0.52.5"
 
 [build-dependencies]
 embed-resource = "2.4"
+
+[profile.release]
+opt-level = 3
+debug = false
+rpath = false
+lto = true
+debug-assertions = false
+codegen-units = 1
+panic = 'unwind'
+incremental = false
+overflow-checks = false

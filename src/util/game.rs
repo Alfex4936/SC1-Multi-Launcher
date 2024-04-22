@@ -291,7 +291,7 @@ pub async unsafe fn modify_processes_once() -> Result<()> {
 
                                 // Check status if necessary and then close the handle
                                 if status.is_ok() {
-                                    println!("Closed handle for StarCraft.exe!");
+                                    println!("\t - Closed proc_handle for StarCraft.exe!");
                                     let _ = CloseHandle(copy_handle);
                                     is_handle_found = true;
                                     break 'outer;

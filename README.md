@@ -22,6 +22,24 @@ I created this as a practice project to gain familiarity with `windows-rs` by po
 
 The original C++ version can be found at [sc_multiloader](https://github.com/somersby10ml/sc_multiloader/tree/main) by @somerby10ml
 
+## Play
+
+### CLI
+
+If you want to run N games, use `-n`.
+
+```powershell
+./sclauncher-cli.exe -n 3
+```
+
+Want to run 64bits? pass `-i`
+
+```powershell
+./sclauncher-cli.exe -n 3 -i
+```
+
+### GUI
+
 ## Key Features
 
 ### Process Management
@@ -62,6 +80,7 @@ Uses Rust's async capabilities and safe concurrency models to manage multiple ga
 ## TODO
 
 - [ ] leptos GUI
+- [x] clap CLI
 - [x] Process get
 - [x] Process handle information
 - [x] Kill process's handle
