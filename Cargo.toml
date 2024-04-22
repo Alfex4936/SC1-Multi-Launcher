@@ -1,0 +1,37 @@
+[package]
+name = "sc-multi-launcher"
+version = "1.0.0"
+edition = "2021"
+authors = ["Seok Won Choi <ikr@kakao.com>"]
+description = "스타크래프트1 멀티 런처 in Rust"
+license = "MIT"
+repository = "https://github.com/Alfex4936/SC1-Multi-Launcher"
+readme = "README.md"
+keywords = ["starcraft", "multi", "launcher", "rust", "windows"]
+categories = ["game", "utility", "windows"]
+
+[dependencies]
+windows = { version = "0.56.0", features = [
+    "Wdk_Foundation",
+    "Wdk_System_Threading",
+    "Wdk_System_SystemInformation",
+    "Wdk_System",
+    "Win32_Foundation",
+    "Win32_Security",
+    "Win32_System_SystemInformation",
+    "Win32_System",
+    "Win32_System_Threading",
+    "Win32_System_SystemServices",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_UI_Shell",
+    "Win32_System_ProcessStatus",
+    "Win32_System_Diagnostics",
+    "Win32_System_Diagnostics_ToolHelp",
+] }
+winreg = "0.52.0"
+tokio = { version = "1", features = ["full"] }
+regex = "1.10.4"
+# windows-targets = "0.52.5"
+
+[build-dependencies]
+embed-resource = "2.4"
